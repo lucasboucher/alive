@@ -45,3 +45,13 @@ struct CaptiveResponseTests {
         #expect(!StatusModel.isCaptiveSuccess(Data()))
     }
 }
+
+struct ReachabilityTests {
+    @Test func successWithStatus200IsReachable() {
+        #expect(StatusModel.isReachable(statusCode: 200, data: Data("Success".utf8)))
+    }
+
+    @Test func successWithAnotherStatusIsNotReachable() {
+        #expect(!StatusModel.isReachable(statusCode: 404, data: Data("Success".utf8)))
+    }
+}

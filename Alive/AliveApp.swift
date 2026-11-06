@@ -120,7 +120,11 @@ final class StatusModel {
         String(decoding: data, as: UTF8.self).contains("Success")
     }
 
-    func check() {
+    nonisolated static func isReachable(statusCode: Int, data: Data) -> Bool {
+        statusCode == 200 && isCaptiveSuccess(data)
+    }
+
+    private func check() {
         probe?.cancel()
 
         guard hasInterface else {
@@ -144,8 +148,9 @@ final class StatusModel {
         var request = URLRequest(url: Self.probeURL, timeoutInterval: Self.probeTimeout)
         request.cachePolicy = .reloadIgnoringLocalCacheData
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
-            return Self.isCaptiveSuccess(data)
+            let (data, response) = try await URLSession.shared.data(for: request)
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+            return Self.isReachable(statusCode: statusCode, data: data)
         } catch {
             return false
         }
