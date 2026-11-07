@@ -16,6 +16,8 @@ A macOS menu bar app that shows your Internet connection status.
 
 The menu shows the current status, the launch-at-login option, and **Quit** (Cmd+Q).
 
+If you remove the menu bar icon, Alive keeps running in the background. To quit it, use Activity Monitor or run `killall Alive` in Terminal.
+
 ## Tests
 
 Run the tests with **Cmd+U** in Xcode.
