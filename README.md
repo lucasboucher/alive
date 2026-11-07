@@ -6,6 +6,10 @@ A macOS menu bar app that shows your Internet connection status.
 - 🟠 Connected to a network, but no Internet access
 - 🔴 No network
 
+## Requirements
+
+- macOS 14.0 or later
+
 ## Installation
 
 1. Open `Alive.xcodeproj` in Xcode.
